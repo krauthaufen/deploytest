@@ -3,21 +3,20 @@
 
 open System
 open Fake.Core
+open Fake.Api
+open Fake.DotNet
 
 Target.create "Default" (fun _ ->
-    let all = Environment.GetEnvironmentVariables()
-    for e in all do
-        let e = unbox<System.Collections.DictionaryEntry> e
-        let k = e.Key |> unbox<string>
-        let v = e.Value |> unbox<string>
+    let pkg = "Aardvark.Base.Essentials.5.0.3.nupkg"
+    pkg |> DotNet.nugetPush (fun p ->
+        { p with
+            PushParams = 
+                { p.PushParams with
+                    Source = Some "github"
+                }
+        }
+    )
 
-        Trace.tracefn "%s: %s" k v
-
-    let tt = Environment.GetEnvironmentVariable "GITHUB_TOKEN"
-    if String.IsNullOrWhiteSpace tt then
-        Trace.traceImportant "NO TOKEN"
-    else    
-        Trace.traceImportantfn "TOKEN: %d" (Unchecked.hash tt)
 )
 
 
