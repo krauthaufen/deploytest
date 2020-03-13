@@ -12,6 +12,12 @@ Target.create "Default" (fun _ ->
         let v = e.Value |> unbox<string>
 
         Trace.tracefn "%s: %s" k v
+
+    let tt = Environment.GetEnvironmentVariable "GITHUB_TOKEN"
+    if String.IsNullOrWhiteSpace tt then
+        Trace.traceImportant "NO TOKEN"
+    else    
+        Trace.traceImportantfn "TOKEN: %d" (Unchecked.hash tt)
 )
 
 
