@@ -11,8 +11,12 @@ Target.create "Default" (fun _ ->
 
     
     let env = 
-        if String.IsNullOrWhiteSpace env then Environment.GetEnvironmentVariable "GITHUB_TOKEN"
-        else env
+        if String.IsNullOrWhiteSpace env then   
+            Trace.traceImportantfn "NUGET TOKEN IS EMPTY"
+            Environment.GetEnvironmentVariable "GITHUB_TOKEN"
+        else 
+            Trace.traceImportantfn "NUGET TOKEN EXISTS"
+            env
 
     Trace.traceImportantfn "TOKEN: %A %A" env.Length env
     let pkg = "Aardvark.Base.Essentials.5.0.3.nupkg"

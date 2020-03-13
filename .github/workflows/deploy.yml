@@ -11,9 +11,8 @@ on:
     - 'docs/'
     
 jobs:
-  build:
+  doit:
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Deploy Package to Github NuGet
