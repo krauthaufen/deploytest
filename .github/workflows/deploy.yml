@@ -22,3 +22,5 @@ jobs:
       run: nuget sources add -name "github" -Source https://nuget.pkg.github.com/krauthaufen/index.json -Username krauthaufen -Password ${{ secrets.GITHUB_TOKEN }}
     - name: Deploy Package to Github NuGet
       run: .\test.cmd
+      env: 
+        GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
