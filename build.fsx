@@ -8,9 +8,9 @@ open Fake.Api
 open Fake.DotNet
 
 Target.create "Default" (fun _ ->
-    let env = Environment.GetEnvironmentVariable "GITHUB_PACKAGE_TOKEN"
+    let env = Environment.GetEnvironmentVariable "GITHUB_TOKEN"
 
-    let cfg = File.ReadAllText("nuget.config").Replace("GITHUB_PACKAGE_TOKEN", env)
+    let cfg = File.ReadAllText("nuget.config").Replace("GITHUB_TOKEN", env)
     File.WriteAllText("nuget.config", cfg)
 
 
