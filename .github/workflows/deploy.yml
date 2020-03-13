@@ -11,7 +11,7 @@ on:
     - 'docs/'
     
 jobs:
-  doit:
+  doit: 
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
