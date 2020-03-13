@@ -8,14 +8,19 @@ open Fake.DotNet
 
 Target.create "Default" (fun _ ->
     let pkg = "Aardvark.Base.Essentials.5.0.3.nupkg"
-    pkg |> DotNet.nugetPush (fun p ->
-        { p with
-            PushParams = 
-                { p.PushParams with
-                    Source = Some "github"
-                }
-        }
-    )
+    let token = Environment.GetEnvironmentVariable "GITHUB_TOKEN"
+    if not (String.IsNullOrWhiteSpace token) then
+        pkg |> DotNet.nugetPush (fun p ->   
+            { p with
+                PushParams = 
+                    { p.PushParams with
+                        ApiKey = Some token
+                        Source = Some "https://nuget.pkg.github.com/krauthaufen"
+                    }
+            }
+        )
+    else
+        Trace.traceImportant "NO TOKEN"
 
 )
 
