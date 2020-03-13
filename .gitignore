@@ -1,0 +1,6 @@
+/.fake
+/.paket
+/.ionide
+/packages
+/paket-files
+build.fsx.lock
