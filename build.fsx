@@ -9,15 +9,6 @@ open Fake.DotNet
 Target.create "Default" (fun _ ->
     let env = Environment.GetEnvironmentVariable "GITHUB_PACKAGE_TOKEN"
 
-    
-    let env = 
-        if String.IsNullOrWhiteSpace env then   
-            Trace.traceImportantfn "NUGET TOKEN IS EMPTY"
-            Environment.GetEnvironmentVariable "GITHUB_TOKEN"
-        else 
-            Trace.traceImportantfn "NUGET TOKEN EXISTS"
-            env
-
     Trace.traceImportantfn "TOKEN: %A %A" env.Length env
     let pkg = "Aardvark.Base.Essentials.5.0.3.nupkg"
 
@@ -25,7 +16,7 @@ Target.create "Default" (fun _ ->
         { p with
             PushParams = 
                 { p.PushParams with
-                    Source = Some "https://nuget.pkg.github.com/krauthaufen/index.json"
+                    Source = Some "https://vrvis.myget.org/F/testfeed/api/v3/index.json"
                     ApiKey = Some env
                 }
         }
